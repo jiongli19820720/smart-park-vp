@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "react-vp",
+      "name": "smart-park-vp",
       "dependencies": {
         "@ant-design/icons": "^6.2.5",
         "@tailwindcss/vite": "^4.3.1",
