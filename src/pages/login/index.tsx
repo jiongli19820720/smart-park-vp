@@ -1,4 +1,3 @@
-import "./index.scss";
 import type { FormProps } from "antd";
 
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -31,14 +30,20 @@ function Login() {
   const [form] = Form.useForm<FieldType>();
 
   return (
-    <div className="login" style={{ backgroundImage: `url(${bg})` }}>
-      <div className="lgbg" style={{ backgroundImage: `url(${lgbg})` }}>
-        <div className="part">
-          <div className="title">
-            <div className="logo">
+    <div
+      className="login flex h-screen items-center justify-center bg-cover bg-center"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
+      <div
+        className="lgbg h-180 w-300 bg-top-left bg-no-repeat"
+        style={{ backgroundImage: `url(${lgbg})` }}
+      >
+        <div className="part ml-auto h-180 w-100 bg-white px-8 pt-36">
+          <div className="title mb-12">
+            <div className="logo flex items-center justify-center">
               <img src={logo} alt="Logo" />
             </div>
-            <h1>智慧园区管理平台</h1>
+            <h1 className="mt-8 text-center text-[#027cc5]">智慧园区管理平台</h1>
           </div>
           <Form
             name="basic"

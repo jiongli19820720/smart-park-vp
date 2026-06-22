@@ -12,7 +12,7 @@ const http: AxiosInstance = axios.create({
 
 // 请求拦截器
 http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  console.log("请求拦截器", config);
+  console.log("请求拦截器", config.data);
   return config;
 });
 
@@ -24,7 +24,10 @@ http.interceptors.response.use((response: AxiosResponse) => {
     message.error(data.code + ":" + data.message);
     return Promise.reject(new Error(data.message));
   }
-  return response.data;
+  if (response.config.url?.includes("/login")) {
+    message.success(data.message || "登录成功");
+  }
+  return data;
 });
 
 export default http;
