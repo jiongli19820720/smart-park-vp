@@ -5,6 +5,8 @@ import axios, {
   type AxiosResponse,
 } from "axios";
 
+import { store } from "../../store";
+
 const http: AxiosInstance = axios.create({
   baseURL: "https://www.demo.com",
   timeout: 5000,
@@ -12,6 +14,10 @@ const http: AxiosInstance = axios.create({
 
 // 请求拦截器
 http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  const token = store.getState().auth.token;
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
+  }
   console.log("请求拦截器", config.data);
   return config;
 });

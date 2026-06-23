@@ -5,6 +5,13 @@ interface LoginDate {
   password: string;
 }
 
+interface LoginResponse {
+  token: string;
+  username: string;
+  name: string;
+  role: string;
+}
+
 export function userLogin(data: LoginDate) {
-  return post("/login", data);
+  return post<LoginResponse>("login", data);
 }

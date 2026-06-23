@@ -1,14 +1,44 @@
 import Mock from "mockjs";
 
+const users = [
+  {
+    username: "admin",
+    password: "123456",
+    token: "mock-token-admin",
+    name: "管理员",
+    role: "admin",
+  },
+  {
+    username: "manager",
+    password: "123456",
+    token: "mock-token-manager",
+    name: "园区经理",
+    role: "manager",
+  },
+  {
+    username: "user",
+    password: "123456",
+    token: "mock-token-user",
+    name: "普通用户",
+    role: "user",
+  },
+];
+
 Mock.mock("https://www.demo.com/login", "post", (options) => {
   const body = JSON.parse(options.body);
+  const user = users.find(
+    (item) => item.username === body.username && item.password === body.password,
+  );
 
-  if (body.username === "admin" && body.password === "123456") {
+  if (user) {
     return {
       code: 200,
       message: "登录成功",
       data: {
-        token: "mock-token",
+        token: user.token,
+        username: user.username,
+        name: user.name,
+        role: user.role,
       },
     };
   }

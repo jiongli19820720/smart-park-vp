@@ -1,14 +1,14 @@
 import http from "./http";
 
-interface ApiResPonse {
+interface ApiResPonse<TData = unknown> {
   code: number;
   message: string;
-  data: unknown;
+  data: TData;
 }
-export function get(url: string, params?: unknown): Promise<ApiResPonse> {
+export function get<TData = unknown>(url: string, params?: unknown): Promise<ApiResPonse<TData>> {
   return http.get(url, { params });
 }
 
-export function post(url: string, data?: unknown): Promise<ApiResPonse> {
+export function post<TData = unknown>(url: string, data?: unknown): Promise<ApiResPonse<TData>> {
   return http.post(url, data);
 }

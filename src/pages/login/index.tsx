@@ -2,6 +2,8 @@ import type { FormProps } from "antd";
 
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../store/slices/authSlice";
 
 import { userLogin } from "../../api/users";
 import bg from "../../assets/bg.jpg";
@@ -13,21 +15,23 @@ type FieldType = {
   password: string;
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-  try {
-    const res = await userLogin(values);
-    console.log("登录成功:", res);
-  } catch (err) {
-    console.log("登录失败:", err);
-  }
-};
-
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-
 function Login() {
   const [form] = Form.useForm<FieldType>();
+  const dispatch = useDispatch();
+
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    try {
+      const res = await userLogin(values);
+      dispatch(setToken(res.data.token));
+      console.log("登录成功:", res);
+    } catch (err) {
+      console.log("登录失败:", err);
+    }
+  };
+
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
 
   return (
     <div
