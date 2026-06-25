@@ -1,15 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { AuthGuard } from "../utils/guards";
 import { Home, Login, NotFound } from "./lazyPages";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <AuthGuard mode="private">
+        <Home />
+      </AuthGuard>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <AuthGuard mode="guest">
+        <Login />
+      </AuthGuard>
+    ),
   },
   {
     path: "*",

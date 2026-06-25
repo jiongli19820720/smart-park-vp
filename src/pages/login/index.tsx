@@ -4,8 +4,11 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import { userLogin } from "../../api/users";
+
 import bg from "../../assets/bg.jpg";
 import lgbg from "../../assets/lgbg.jpg";
 import logo from "../../assets/logo.png";
@@ -18,13 +21,19 @@ type FieldType = {
 function Login() {
   const [form] = Form.useForm<FieldType>();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoding] = useState<boolean>(false);
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     try {
+      setLoding(true);
       const res = await userLogin(values);
       dispatch(setToken(res.data.token));
+      setLoding(false);
+      void navigate("/", { replace: true });
       console.log("登录成功:", res);
     } catch (err) {
+      setLoding(false);
       console.log("登录失败:", err);
     }
   };
@@ -71,7 +80,7 @@ function Login() {
             </Form.Item>
 
             <Form.Item label={null}>
-              <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+              <Button type="primary" htmlType="submit" style={{ width: "100%" }} loading={loading}>
                 登录
               </Button>
             </Form.Item>
