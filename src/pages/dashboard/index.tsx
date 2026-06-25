@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Layout } from "antd";
+import { Outlet } from "react-router-dom";
 import NavMenu from "../../components/NavMenu";
 import NavBreadcrumb from "../../components/NavBreadcrumb";
 import NavHeader from "../../components/NavHeader";
@@ -24,14 +25,7 @@ function Dashboard() {
           </Header>
           <Content style={{ margin: "0 16px" }}>
             <NavBreadcrumb />
-            <div
-              style={{
-                padding: 24,
-                minHeight: 360,
-              }}
-            >
-              Bill is a cat.
-            </div>
+            <Outlet />
           </Content>
           <Footer style={{ textAlign: "center" }}>
             Ant Design ©{currentYear} Created by Ant UED

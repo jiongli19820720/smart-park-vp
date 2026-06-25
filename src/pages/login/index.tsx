@@ -3,7 +3,7 @@ import type { FormProps } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
-import { setUserInfo } from "../../store/slices/authSlice";
+import { setToken } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ function Login() {
     try {
       setLoding(true);
       const res = await userLogin(values);
-      dispatch(setUserInfo({ token: res.data.token, role: res.data.role }));
+      dispatch(setToken(res.data.token));
       setLoding(false);
       void navigate("/", { replace: true });
       console.log("登录成功:", res);

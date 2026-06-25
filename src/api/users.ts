@@ -8,8 +8,7 @@ interface LoginDate {
 interface LoginResponse {
   token: string;
   username: string;
-  name: string;
-  role: string;
+  btnAuth: string[];
 }
 
 export function userLogin(data: LoginDate) {
