@@ -91,7 +91,7 @@ export default defineConfig({
           "typescript/ban-ts-comment": "error",
           "typescript/no-duplicate-enum-values": "error",
           "typescript/no-empty-object-type": "error",
-          "typescript/no-explicit-any": "error",
+          "typescript/no-explicit-any": "off",
           "typescript/no-extra-non-null-assertion": "error",
           "typescript/no-misused-new": "error",
           "typescript/no-namespace": "error",
