@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import { map } from "remeda";
 
 import { AuthGuard } from "../utils/guards";
 import { Home, Login, MenuPlaceholder, NotFound } from "./lazyPages";
@@ -41,7 +42,8 @@ const router = createBrowserRouter([
         index: true,
         element: <MenuPlaceholder />,
       },
-      ...menuRoutes.map((path) => ({
+      // 根据菜单接口可能返回的 key 预注册占位路由，后续真实页面会逐个替换 element。
+      ...map(menuRoutes, (path) => ({
         path,
         element: <MenuPlaceholder />,
       })),

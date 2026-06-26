@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { setBreadcrumbLabels } from "../../store/slices/breadcrumbSlice";
 
 import { getMenuList } from "../../api/menus";
-import getLabelsByKeyPath from "../../utils/getLabelsByKeyPath";
-import { transformMenuItems } from "../../utils/transformMenuItems";
+import { getLabelsByKeyPath, transformMenuItems } from "../../utils/transformMenuItems";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
