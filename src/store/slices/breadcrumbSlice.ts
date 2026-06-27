@@ -6,7 +6,7 @@ interface BreadcrumbState {
 }
 
 const initialState: BreadcrumbState = {
-  labels: ["1", "sub1"],
+  labels: [],
 };
 
 const breadcrumbSlice = createSlice({

@@ -6,9 +6,10 @@ import axios, {
 } from "axios";
 
 import { store } from "../../store";
+import { API_BASE_URL } from "../../config/env";
 
 const http: AxiosInstance = axios.create({
-  baseURL: "https://www.demo.com",
+  baseURL: API_BASE_URL,
   timeout: 5000,
 });
 
@@ -18,13 +19,11 @@ http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
-  console.log("请求拦截器", config.data);
   return config;
 });
 
 // 响应拦截器
 http.interceptors.response.use((response: AxiosResponse) => {
-  console.log("响应拦截器", response.data);
   const data = response.data;
   if (data.code != 200) {
     message.error(data.code + ":" + data.message);
